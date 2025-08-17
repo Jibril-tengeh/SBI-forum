@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+  <title>SBI Forum</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <!-- Icônes Feather (CDN ultra-léger) -->
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+  <!-- HEADER FIXE -->
+  <header id="header">
+    <span id="logo">SBI Forum</span>
+    <div id="header-icons">
+      <i data-feather="search" id="searchBtn"></i>
+      <i data-feather="moon" id="darkToggle"></i>
+      <img id="userAvatar" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiM5OTkiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDEyYzIuMjEgMCA0LTEuNzkgNC00cy0xLjc5LTQtNC00LTQgMS43OS00IDQgMS43OSA0IDQgNHptMCAyYy0yLjY3IDAtOCAxLjM0LTggNHYyaDE2di0yYzAtMi42Ni01LjMzLTQtOC00eiIvPjwvc3ZnPg==" alt="avatar"/>
+    </div>
+  </header>
+
+  <!-- CONTENU PRINCIPAL -->
+  <main id="main">
+    <!-- Écran par défaut : FEED -->
+    <section id="feed" class="screen active">
+      <button id="editProfileBtn" class="btn secondary full">Compléter mon profil</button>
+      <div id="postsList"></div>
+    </section>
+
+    <!-- Écran CREER POST -->
+    <section id="createPost" class="screen">
+      <h2>Nouveau post</h2>
+      <div id="editorToolbar">
+        <button data-cmd="h1">H1</button>
+        <button data-cmd="h2">H2</button>
+        <button data-cmd="bold"><i data-feather="bold"></i></button>
+        <button data-cmd="italic"><i data-feather="italic"></i></button>
+        <button data-cmd="underline"><i data-feather="underline"></i></button>
+        <select id="fontSizeSel">
+          <option value="16">Taille</option>
+          <option value="8">8</option><option value="12">12</option><option value="16">16</option>
+          <option value="24">24</option><option value="32">32</option><option value="48">48</option><option value="100">100</option>
+        </select>
+        <select id="fontFamilySel">
+          <option value="sans-serif">Police</option>
+          <option value="serif">Serif</option>
+          <option value="monospace">Monospace</option>
+          <option value="cursive">Cursive</option>
+        </select>
+        <input type="color" id="txtColor" title="Couleur texte"/>
+        <input type="color" id="bgColor" title="Couleur fond"/>
+        <button data-cmd="blockquote"><i data-feather="message-square"></i></button>
+        <button data-cmd="code"><i data-feather="code"></i></button>
+        <button data-cmd="link"><i data-feather="link"></i></button>
+        <button data-cmd="media"><i data-feather="image"></i></button>
+        <button data-cmd="audio"><i data-feather="mic"></i></button>
+        <button data-cmd="embed"><i data-feather="youtube"></i></button>
+      </div>
+      <div id="editor" contenteditable="true" placeholder="Exprimez-vous…"></div>
+      <div id="mediaPreview"></div>
+      <div id="postActions">
+        <button id="previewBtn" class="btn secondary">Aperçu</button>
+        <button id="draftBtn" class="btn secondary">Brouillon</button>
+        <button id="publishBtn" class="btn primary">Publier</button>
+      </div>
+    </section>
+
+    <!-- MODAL PREVIEW -->
+    <div id="previewModal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div id="previewRender"></div>
+      </div>
+    </div>
+
+    <!-- MODAL PROFIL -->
+    <div id="profileModal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Mon profil</h2>
+        <form id="profileForm">
+          <label>Pseudo (obligatoire)
+            <input id="pseudoInput" required/>
+          </label>
+          <label>Photo de profil
+            <input type="file" id="avatarFile" accept="image/*"/>
+            <canvas id="avatarCanvas" style="display:none;"></canvas>
+          </label>
+          <label>Photo de couverture
+            <input type="file" id="coverFile" accept="image/*"/>
+            <canvas id="coverCanvas" style="display:none;"></canvas>
+          </label>
+          <button type="submit" class="btn primary full">Enregistrer</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ÉCRANS SUPPLÉMENTAIRES (squelettes) -->
+    <section id="groups" class="screen">Groupes</section>
+    <section id="notifications" class="screen">Notifications</section>
+    <section id="messages" class="screen">Messages</section>
+  </main>
+
+  <!-- FOOTER FIXE -->
+  <footer id="footer">
+    <nav>
+      <i data-feather="home" data-screen="feed"></i>
+      <i data-feather="users" data-screen="groups"></i>
+      <i data-feather="plus-circle" id="createBtn" data-screen="createPost"></i>
+      <i data-feather="bell" data-screen="notifications">
+        <span id="notifBadge" class="badge hidden">0</span>
+      </i>
+      <i data-feather="message-circle" data-screen="messages"></i>
+    </nav>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
